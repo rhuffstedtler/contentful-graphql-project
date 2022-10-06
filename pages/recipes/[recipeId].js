@@ -1,8 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
+import MainLayout from "@layouts/main";
 import {useRouter} from "next/router";
-import styles from "../../styles/Home.module.css";
+import styles from "@styles/Recipe.module.css";
 import {getRecipeAndMoreRecipes, getAllRecipesForHome} from "../../lib/api";
+import AuthorCard from "@components/author/AuthorCard";
+import RelatedRecipes from "@components/RelatedRecipes";
 
 // Fetch for a single post
 
@@ -41,6 +44,7 @@ export default function Recipe({recipe, relatedRecipes}){
   const router = useRouter();
 
   return (
+    <MainLayout>
       <div className={styles.container}>
           <Head>
           <title>Recipe app</title>
@@ -48,9 +52,7 @@ export default function Recipe({recipe, relatedRecipes}){
           <link rel="icon" href="/favicon.ico" />
           </Head>
 
-      <main className={styles.main}>
-
-      {
+        {
           router.isFallBack ? (
               <div styles={styles.title}>
                   Loading
@@ -58,64 +60,32 @@ export default function Recipe({recipe, relatedRecipes}){
           ): (
           <>
           
-          <div className={styles.content}>
+            <div className={styles.content}>
 
-          <div styles={styles.title}>
-              {recipe.title}
-          </div>
-
-
-          <p className={styles.meta}>
-              {new Date(recipe.date).toDateString()}
-          </p>
+            <div styles="title">
+                {recipe.title}
+            </div>
 
 
-          <div className={styles.coverImage}>
-              <img src={recipe.featuredImage.url} alt={recipe.title} />
-          </div>
+            <p className={styles.meta}>
+                {new Date(recipe.date).toDateString()}
+            </p>
 
-          </div>
+            <AuthorCard author={recipe.author} />
           
-          <div className={styles.grid}>
-          {
-              relatedRecipes.length > 0 ? (
-                  <>
-                      <div className={styles.title}>
-                          Related Recipes
-                      </div>
-                      {
-                      relatedRecipes.map((recipe) => (
-                          
-                          <div className={styles.card} key={recipe.sys.id}>
-                          <div className={styles.imageHolder}>
-                              <img src={recipe.featuredImage.url} alt={recipe.title} />
-                          </div>
-                          <div className={styles.details}>
-                              <Link href={`recipes/${recipe.sys.id}`}>
-                              <a>
-                              {recipe.title} &rarr;
-                              </a>
-                              </Link>
-                              <p>{recipe.excerpt}</p>
-                          </div>
-                          </div>
-                      
-                      ))
-                      }
-                  </>
-              ) : null
-          }
-          </div>
-              </>
+
+
+            <div className={styles.featuredImage}>
+                <img src={recipe.featuredImage.url} alt={recipe.title} />
+            </div>
+
+            </div>
+            
+            <RelatedRecipes relatedRecipes={relatedRecipes} />
+          </>
           )
       }
-
-          
-      </main>
-
-      <footer className={styles.footer}>
-          <p>Simple recipe app</p>
-      </footer>
       </div>
+    </MainLayout>
   )
 }

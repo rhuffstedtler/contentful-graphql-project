@@ -1,0 +1,11 @@
+.featuredImage {
+  width: 100%;
+}
+
+.featuredImage img {
+  object-fit: contain;
+}
+
+.meta {
+  background-color: red;
+}
