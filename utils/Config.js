@@ -52,12 +52,12 @@ export const Config = {
   },
   menuLinks: [
     {
-      displayName: "Home",
+      displayName: "Recipes",
       path: "/",
     },
     {
-      displayName: "Recipes",
-      path: "/recipes",
+      displayName: "Chefs",
+      path: "/chefs",
     },
   ],
 };
