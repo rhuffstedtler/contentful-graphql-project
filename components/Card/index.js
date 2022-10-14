@@ -9,20 +9,18 @@ export default function Card(props) {
 
   return (
     <div className={styles.card} key={post.sys.id}>
-      <div className={styles.details}>
       <div className={styles.imageHolder}>
-          <Image src={post.featuredImage.url}
-            height={post.featuredImage.height}
-            width={post.featuredImage.width}
-          />
-        </div>
-        <div className="cardTitle">
-          <Link href={`recipes/${post.sys.id}`}>
-            <a>{post.title}</a>
-          </Link>
-        </div> 
-        <div>{post.excerpt}</div>
+        <Image src={post.featuredImage.url + `?fm=webp&fit=fill&w=600&h=600`}
+          layout='fill'
+          objectFit="cover"
+        />
       </div>
+      <div className="cardTitle">
+        <Link href={`recipes/${post.sys.id}`}>
+          <a>{post.title}</a>
+        </Link>
+      </div> 
+      <div>{post.excerpt}</div>
     </div>
   )
 }

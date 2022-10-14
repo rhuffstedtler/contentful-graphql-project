@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 import MainLayout from "@layouts/main";
 import styles from '@styles/Home.module.css'
 import {getAllRecipesForHome} from "../lib/api"
@@ -11,7 +9,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 export default function Home({allPosts}) {
   return (
     <MainLayout>
-      <div className={styles.container}>
+      <div className="contentContainer">
         <Head>
           <title>Scrumptious Receipes</title>
           <meta name="description" content="This is a recipe site" />

@@ -12,8 +12,12 @@
   padding: 10px;
 }
 
+.imageHolder {
+  height: 300px;
+  position: relative;
+}
+
 .card img {
-  max-width: 300px;
   object-fit: contain;
 }
 
