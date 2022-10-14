@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image"
 import Link from "next/link";
 import MainLayout from "@layouts/main";
 import {useRouter} from "next/router";
@@ -6,12 +7,13 @@ import styles from "@styles/Recipe.module.css";
 import {getRecipeAndMoreRecipes, getAllRecipesForHome} from "../../lib/api";
 import AuthorCard from "@components/author/AuthorCard";
 import RelatedRecipes from "@components/RelatedRecipes";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 // Fetch for a single post
 
 export async function getStaticProps({ params: { recipeId } }) {
   let { recipe, relatedRecipes } = await getRecipeAndMoreRecipes(false, recipeId);
-  console.log(`in page recipe: ${JSON.stringify(recipe)}`)
+  console.log(`\n\nin page recipe intro: ${JSON.stringify(recipe.introduction.json)}`)
   return {
       props: {
           recipe,
@@ -30,7 +32,7 @@ export async function getStaticPaths() {
       params: {
           recipeId: recipe.sys.id
       }
-  })
+    })
   );
 
   return {
@@ -59,27 +61,22 @@ export default function Recipe({recipe, relatedRecipes}){
               </div>
           ): (
           <>
-          
-            <div className={styles.content}>
-
-            <div styles="title">
-                {recipe.title}
-            </div>
-
+            <h1>{recipe.title}</h1>
 
             <p className={styles.meta}>
                 {new Date(recipe.date).toDateString()}
             </p>
 
             <AuthorCard author={recipe.author} />
-          
-
-
+        
             <div className={styles.featuredImage}>
-                <img src={recipe.featuredImage.url} alt={recipe.title} />
+              <Image src={recipe.featuredImage.url + '?fm=webp&fit=fill&w=1080&h=1080'}
+                layout='fill'
+              />
             </div>
 
-            </div>
+            <div className={styles.introduction}>{documentToReactComponents(recipe.introduction.json)}</div>
+
             
             <RelatedRecipes relatedRecipes={relatedRecipes} />
           </>

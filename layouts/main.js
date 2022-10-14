@@ -9,7 +9,12 @@ export default function MainLayout(props) {
     <>
       {preview && <PreviewBanner />}
       <Header />
-      <main className={styles.main}>{props.children}</main>
+      <main className={styles.main}>
+        {/* TODO: refactor styles and kill off the extra div */}
+        <div className="contentContainer">
+          {props.children}
+        </div>
+      </main>
       <Footer />
     </>
   );

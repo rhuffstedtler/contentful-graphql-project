@@ -1,11 +1,10 @@
 .featuredImage {
   width: 100%;
+  height: 400px;
+  max-height: 800px;
+  position: relative;
 }
 
 .featuredImage img {
   object-fit: contain;
-}
-
-.meta {
-  background-color: red;
 }
