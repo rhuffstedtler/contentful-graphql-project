@@ -3,7 +3,7 @@ import MainLayout from "@layouts/main";
 import styles from '@styles/Home.module.css'
 import {getAllRecipesForHome} from "../lib/api"
 import Card from "@components/Card"
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+
 
 
 export default function Home({allPosts}) {

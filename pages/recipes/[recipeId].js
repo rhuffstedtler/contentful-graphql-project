@@ -5,6 +5,7 @@ import MainLayout from "@layouts/main";
 import {useRouter} from "next/router";
 import styles from "@styles/Recipe.module.css";
 import {getRecipeAndMoreRecipes, getAllRecipesForHome} from "../../lib/api";
+import ArticleMeta from "@components/ArticleMeta";
 import AuthorCard from "@components/author/AuthorCard";
 import RelatedRecipes from "@components/RelatedRecipes";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -63,15 +64,12 @@ export default function Recipe({recipe, relatedRecipes}){
           <>
             <h1>{recipe.title}</h1>
 
-            <p className={styles.meta}>
-                {new Date(recipe.date).toDateString()}
-            </p>
-
-            <AuthorCard author={recipe.author} />
+            <ArticleMeta author={recipe.author} date={recipe.date} />
         
             <div className={styles.featuredImage}>
               <Image src={recipe.featuredImage.url + '?fm=webp&fit=fill&w=1080&h=1080'}
                 layout='fill'
+                objectFit="cover"
               />
             </div>
 
