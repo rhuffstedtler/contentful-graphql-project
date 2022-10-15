@@ -9,6 +9,7 @@ import ArticleMeta from "@components/ArticleMeta";
 import AuthorCard from "@components/author/AuthorCard";
 import RelatedRecipes from "@components/RelatedRecipes";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import RecipeStep from "@components/RecipeStep";
 
 // Fetch for a single post
 
@@ -75,6 +76,14 @@ export default function Recipe({recipe, relatedRecipes}){
 
             <div className={styles.introduction}>{documentToReactComponents(recipe.introduction.json)}</div>
 
+            <h2>Instructions</h2>
+            {
+              recipe.stepsCollection?.items?.length > 0 &&
+                recipe.stepsCollection.items.map((step) => (
+                  <RecipeStep />
+                ))
+              
+            }
             
             <RelatedRecipes relatedRecipes={relatedRecipes} />
           </>
