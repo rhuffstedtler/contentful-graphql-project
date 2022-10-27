@@ -10,7 +10,7 @@ export default function Home({allPosts}) {
   return (
     <MainLayout>
       <Head>
-        <title>Scrumptious Receipes</title>
+        <title>Scrumptious Recipes</title>
         <meta name="description" content="This is a recipe site" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
