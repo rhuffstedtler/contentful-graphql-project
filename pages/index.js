@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import MainLayout from "@layouts/main";
 import styles from '@styles/Home.module.css'
-import {getAllRecipesForHome} from "../lib/api"
+import {getRecipesForHome} from "../lib/api"
 import Card from "@components/Card"
 
 
@@ -19,7 +19,7 @@ export default function Home({allPosts}) {
         {
           allPosts.length > 0 ? (
             allPosts.map((post) => (
-              <Card post={post}/>
+              <Card key={post.sys.id} post={post}/>
             ))
           ) : (
             <div className={styles.card}>
@@ -33,7 +33,7 @@ export default function Home({allPosts}) {
 }
 
 export async function getStaticProps({preview = false}){
-  let allPosts = (await getAllRecipesForHome(preview))  ?? [];
+  let allPosts = (await getRecipesForHome(preview))  ?? [];
 
   return {
       props: { preview, allPosts }
